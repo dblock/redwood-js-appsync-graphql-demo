@@ -1,6 +1,6 @@
 // Define your own mock data here:
 export const standard = (/* vars, { ctx, req } */) => ({
-  restaurants: {
+  zip: {
     id: 42,
   },
 })

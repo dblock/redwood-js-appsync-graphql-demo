@@ -1,15 +1,27 @@
-import { Link, routes } from '@redwoodjs/router'
+import { useState } from 'react'
+import { Form, TextField, Submit } from '@redwoodjs/forms'
+import RestaurantsCell from 'src/components/RestaurantsCell'
 
 const HomePage = () => {
+  const [zip, setZip] = useState()
+
+  const onSubmit = (data) => {
+    setZip(data.zipCode)
+  }
+
   return (
-    <>
-      <h1>HomePage</h1>
-      <p>Find me in "./web/src/pages/HomePage/HomePage.js"</p>
-      <p>
-        My default route is named "home", link to me with `
-        <Link to={routes.home()}>Home</Link>`
-      </p>
-    </>
+    <div>
+      <Form onSubmit={onSubmit} style={{fontSize: '2rem'}}>
+        <TextField
+          name="zipCode"
+          placeholder="Zip code"
+          maxLength="5"
+          validation={{ required: true, pattern: /^\d{5}$/ }}
+        />
+        <Submit>Go</Submit>
+      </Form>
+      {zip && <RestaurantsCell zip={zip} />}
+    </div>
   )
 }
 

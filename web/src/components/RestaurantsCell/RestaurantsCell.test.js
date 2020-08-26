@@ -20,11 +20,9 @@ describe('RestaurantsCell', () => {
   })
 
   it('Success renders successfully', () => {
-    render(
-      <Success userExample={{ restaurants: { objectKey: 'objectValue' } }} />
-    )
+    render(<Success userExample={{ zip: { objectKey: 'objectValue' } }} />)
     expect(
-      screen.queryByText('{"restaurants":{"objectKey":"objectValue"}}')
+      screen.queryByText('{"zip":{"objectKey":"objectValue"}}')
     ).toBeInTheDocument()
   })
 })
