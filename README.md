@@ -1,24 +1,51 @@
-# Redwood
+A [Redwood.js](https://redwoodjs.com) demo app that retrieves and displays data from an AppSync GraphQL service. See [this discussion](https://community.redwoodjs.com/t/how-can-i-wire-up-a-graphql-api-to-redwoodjs/1112) for details.
 
-> **WARNING:** RedwoodJS software has not reached a stable version 1.0 and should not be considered suitable for production use. In the "make it work; make it right; make it fast" paradigm, Redwood is in the later stages of the "make it work" phase.
+![Screenshot](demo.png)
 
-## Getting Started
-- [Tutorial](https://redwoodjs.com/tutorial/welcome-to-redwood): getting started and complete overview guide.
-- [Docs](https://redwoodjs.com/docs/introduction): using the Redwood Router, handling assets and files, list of command-line tools, and more.
-- [Redwood Community](https://community.redwoodjs.com): get help, share tips and tricks, and collaborate on everything about RedwoodJS.
+### Run Me
 
-### Setup
+#### API
 
-We use Yarn as our package manager. To get the dependencies installed, just do this in the root directory:
+I used an AppSync endpoint that returned data with the following schema. This was an existing service that is not available publicly.
 
-```terminal
-yarn install
+```graphql
+type ZipData {
+	zip: String
+	timezone: String
+	restaurants: [RestaurantData]
+}
+
+type RestaurantData {
+	name: String
+	latitude: String
+	longitude: String
+}
+
+type Query {
+	get_zip(zip: String!): ZipData
+}
+
+schema {
+	query: Query
+}
 ```
 
-### Fire it up
+#### Settings
 
-```terminal
+Create `.env` with the following settings
+
+```
+GOOGLE_MAPS_API_KEY=
+APPSYNC_API_ENDPOINT_URL=https://....appsync-api.us-east-1.amazonaws.com/graphql
+APPSYNC_API_KEY=
+```
+
+#### Run
+
+```
 yarn redwood dev
 ```
 
-Your browser should open automatically to `http://localhost:8910` to see the web app. Lambda functions run on `http://localhost:8911` and are also proxied to `http://localhost:8910/.redwood/functions/*`. 
+
+
+
